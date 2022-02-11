@@ -6,6 +6,6 @@ services:
       - '3306:3306'
     environment:
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
-      - MYSQL_DATABASE=aqa-db
+      - MYSQL_DATABASE=aqa-shop
       - MYSQL_USER=aqa
       - MYSQL_PASSWORD=mypass
