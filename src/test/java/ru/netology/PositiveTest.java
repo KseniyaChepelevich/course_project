@@ -9,7 +9,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.mode.DataHelper;
-import ru.netology.web.page.MainPage;
+
+import ru.netology.web.page.OrderPage;
 
 import static com.codeborne.selenide.Selenide.open;
 
@@ -34,7 +35,7 @@ public class PositiveTest {
     public void shouldAuthorizationIsSuccessful() {
         Configuration.holdBrowserOpen = true;
         val cardInfo = new DataHelper().getValidCardInfo();
-        val paymentPage = new MainPage().getPaymentPage();
+        val paymentPage = new OrderPage().getPaymentPage();
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getNotificationOk();
 
