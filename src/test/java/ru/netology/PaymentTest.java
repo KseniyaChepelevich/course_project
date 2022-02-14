@@ -24,14 +24,21 @@ public class PaymentTest {
         SelenideLogger.addListener("allure", new AllureSelenide());
     }
 
-    @AfterAll
-    static void tearDownAll() {
-        SelenideLogger.removeListener("allure");
-    }
+
 
     @BeforeEach
     void setUp(){
         open("http://localhost:8080");
+    }
+
+    @BeforeEach
+    void deletingDataFromTheDb() {
+        DBHelper.DeleteInfo.deletingData();
+    }
+
+    @AfterAll
+    static void tearDownAll() {
+        SelenideLogger.removeListener("allure");
     }
 
     @Test
@@ -44,10 +51,11 @@ public class PaymentTest {
         paymentPage.getNotificationOk();
         val paymentStatus = new DBHelper().getPaymentStatus();
         val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
         val creditStatus = new DBHelper().getCreditStatus();
+        val paymentID = new DBHelper().getPaymentId();
         assertEquals("APPROVED", paymentStatus);
         assertEquals(transactionId, paymentID);
+        assertNull(creditStatus);
 
     }
 
@@ -59,9 +67,13 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getNotificationError();
         val paymentStatus = new DBHelper().getPaymentStatus();
+        val transactionId = new DBHelper().getTransactionId();
         val creditStatus = new DBHelper().getCreditStatus();
+        val paymentID = new DBHelper().getPaymentId();
         assertEquals("DECLINED", paymentStatus);
+        assertEquals(transactionId, paymentID);
         assertNull(creditStatus);
+
     }
 
     @Test
@@ -76,6 +88,7 @@ public class PaymentTest {
         paymentPage.getErrorNotificationYearRequired();
         paymentPage.getErrorNotificationOwnerRequired();
         paymentPage.getErrorNotificationCVCRequired();
+        //Проверить что не появилось записей в бд
         assertNull(paymentStatus);
         assertNull(creditStatus);
     }
@@ -88,8 +101,11 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getNotificationOk();
         val paymentStatus = new DBHelper().getPaymentStatus();
+        val transactionId = new DBHelper().getTransactionId();
+        val paymentID = new DBHelper().getPaymentId();
         val creditStatus = new DBHelper().getCreditStatus();
         assertEquals("APPROVED", paymentStatus);
+        assertEquals(transactionId, paymentID);
         assertNull(creditStatus);
     }
 
@@ -101,8 +117,11 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getNotificationOk();
         val paymentStatus = new DBHelper().getPaymentStatus();
+        val transactionId = new DBHelper().getTransactionId();
+        val paymentID = new DBHelper().getPaymentId();
         val creditStatus = new DBHelper().getCreditStatus();
         assertEquals("APPROVED", paymentStatus);
+        assertEquals(transactionId, paymentID);
         assertNull(creditStatus);
     }
 
@@ -114,8 +133,11 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getNotificationOk();
         val paymentStatus = new DBHelper().getPaymentStatus();
+        val transactionId = new DBHelper().getTransactionId();
+        val paymentID = new DBHelper().getPaymentId();
         val creditStatus = new DBHelper().getCreditStatus();
         assertEquals("APPROVED", paymentStatus);
+        assertEquals(transactionId, paymentID);
         assertNull(creditStatus);
     }
 
@@ -127,8 +149,11 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getNotificationOk();
         val paymentStatus = new DBHelper().getPaymentStatus();
+        val transactionId = new DBHelper().getTransactionId();
+        val paymentID = new DBHelper().getPaymentId();
         val creditStatus = new DBHelper().getCreditStatus();
         assertEquals("APPROVED", paymentStatus);
+        assertEquals(transactionId, paymentID);
         assertNull(creditStatus);
     }
 
@@ -138,10 +163,151 @@ public class PaymentTest {
         val cardInfo = new DataHelper().getInvalidCardInfoNameToLowerCase();
         val paymentPage = new OrderPage().getPaymentPage();
         paymentPage.fillingOutTheForm(cardInfo);
-        paymentPage.getNotificationOk();
+        paymentPage.getWrongFormatOwnerField();
+        //Проверить, что не появилось новых записей в бд
         val paymentStatus = new DBHelper().getPaymentStatus();
+        val transactionId = new DBHelper().getTransactionId();
+        val paymentID = new DBHelper().getPaymentId();
+        val creditStatus = new DBHelper().getCreditStatus();
+        assertNull(transactionId);
+        assertNull(paymentID);
+        assertNull(creditStatus);
+    }
+
+    @Test
+    public void shouldGetAnErrorApprovedCardNameInCyrillic() {
+        Configuration.holdBrowserOpen = true;
+        val cardInfo = new DataHelper().getInvalidCardInfoNameInCyrillic();
+        val paymentPage = new OrderPage().getPaymentPage();
+        paymentPage.fillingOutTheForm(cardInfo);
+        paymentPage.getWrongFormatOwnerField();
+        //Проверить, что не появилось новых записей в бд
+        val paymentStatus = new DBHelper().getPaymentStatus();
+        val transactionId = new DBHelper().getTransactionId();
+        val paymentID = new DBHelper().getPaymentId();
+        val creditStatus = new DBHelper().getCreditStatus();
+        assertNull(transactionId);
+        assertNull(paymentID);
+        assertNull(creditStatus);
+    }
+
+    @Test
+    public void shouldGetAnErrorApprovedCardNameInHieroglyphs() {
+        Configuration.holdBrowserOpen = true;
+        val cardInfo = new DataHelper().getInvalidCardInfoWithHieroglyphsName();
+        val paymentPage = new OrderPage().getPaymentPage();
+        paymentPage.fillingOutTheForm(cardInfo);
+        paymentPage.getWrongFormatOwnerField();
+        //Проверить, что не появилось новых записей в бд
+        val paymentStatus = new DBHelper().getPaymentStatus();
+        val transactionId = new DBHelper().getTransactionId();
+        val paymentID = new DBHelper().getPaymentId();
+        val creditStatus = new DBHelper().getCreditStatus();
+        assertNull(transactionId);
+        assertNull(paymentID);
+        assertNull(creditStatus);
+    }
+
+    @Test
+    public void shouldGetAnErrorApprovedCardNameNumbers() {
+        Configuration.holdBrowserOpen = true;
+        val cardInfo = new DataHelper().getInvalidCardInfoWithNumbersName();
+        val paymentPage = new OrderPage().getPaymentPage();
+        paymentPage.fillingOutTheForm(cardInfo);
+        paymentPage.getWrongFormatOwnerField();
+        //Проверить, что не появилось новых записей в бд
+        val paymentStatus = new DBHelper().getPaymentStatus();
+        val transactionId = new DBHelper().getTransactionId();
+        val paymentID = new DBHelper().getPaymentId();
+        val creditStatus = new DBHelper().getCreditStatus();
+        assertNull(transactionId);
+        assertNull(paymentID);
+        assertNull(creditStatus);
+    }
+
+    @Test
+    public void shouldGetAnErrorApprovedCardNameNonNumericAndNonAlphabeticCharacters() {
+        Configuration.holdBrowserOpen = true;
+        val cardInfo = new DataHelper().getInvalidCardInfoWithNonNumericAndNonAlphabeticCharactersName();
+        val paymentPage = new OrderPage().getPaymentPage();
+        paymentPage.fillingOutTheForm(cardInfo);
+        paymentPage.getWrongFormatOwnerField();
+        //Проверить, что не появилось новых записей в бд
+        val paymentStatus = new DBHelper().getPaymentStatus();
+        val transactionId = new DBHelper().getTransactionId();
+        val paymentID = new DBHelper().getPaymentId();
+        val creditStatus = new DBHelper().getCreditStatus();
+        assertNull(transactionId);
+        assertNull(paymentID);
+        assertNull(creditStatus);
+    }
+
+    @Test
+    public void shouldPaymentApprovedCardNameWithASpaceAtTheBeginning() {
+        Configuration.holdBrowserOpen = true;
+        val cardInfo = new DataHelper().getInvalidCardInfoWithLatinNameWithASpaceAtTheBeginning();
+        val paymentPage = new OrderPage().getPaymentPage();
+        paymentPage.fillingOutTheForm(cardInfo);
+        //Добавить проверку на игнорирование пробела в начале имени владельца
+        paymentPage.getNotificationOk();
+
+        val paymentStatus = new DBHelper().getPaymentStatus();
+        val transactionId = new DBHelper().getTransactionId();
+        val paymentID = new DBHelper().getPaymentId();
         val creditStatus = new DBHelper().getCreditStatus();
         assertEquals("APPROVED", paymentStatus);
+        assertEquals(transactionId, paymentID);
+        assertNull(creditStatus);
+    }
+
+    @Test
+    public void shouldPaymentApprovedCardNameWithThreeLetter() {
+        Configuration.holdBrowserOpen = true;
+        val cardInfo = new DataHelper().getInvalidCardInfoWithLatinThreeLetterName();
+        val paymentPage = new OrderPage().getPaymentPage();
+        paymentPage.fillingOutTheForm(cardInfo);
+        paymentPage.getNotificationOk();
+
+        val paymentStatus = new DBHelper().getPaymentStatus();
+        val transactionId = new DBHelper().getTransactionId();
+        val paymentID = new DBHelper().getPaymentId();
+        val creditStatus = new DBHelper().getCreditStatus();
+        assertEquals("APPROVED", paymentStatus);
+        assertEquals(transactionId, paymentID);
+        assertNull(creditStatus);
+    }
+
+    @Test
+    public void shouldPaymentApprovedCardNameWithTwoLetter() {
+        Configuration.holdBrowserOpen = true;
+        val cardInfo = new DataHelper().getInvalidCardInfoWithLatinTwoLetterName();
+        val paymentPage = new OrderPage().getPaymentPage();
+        paymentPage.fillingOutTheForm(cardInfo);
+        paymentPage.getWrongFormatOwnerField();
+
+        val paymentStatus = new DBHelper().getPaymentStatus();
+        val transactionId = new DBHelper().getTransactionId();
+        val paymentID = new DBHelper().getPaymentId();
+        val creditStatus = new DBHelper().getCreditStatus();
+        assertNull(transactionId);
+        assertNull(paymentID);
+        assertNull(creditStatus);
+    }
+
+    @Test
+    public void shouldPaymentApprovedCardNameWithFourLetter() {
+        Configuration.holdBrowserOpen = true;
+        val cardInfo = new DataHelper().getInvalidCardInfoWithLatinFourLetterName();
+        val paymentPage = new OrderPage().getPaymentPage();
+        paymentPage.fillingOutTheForm(cardInfo);
+        paymentPage.getNotificationOk();
+
+        val paymentStatus = new DBHelper().getPaymentStatus();
+        val transactionId = new DBHelper().getTransactionId();
+        val paymentID = new DBHelper().getPaymentId();
+        val creditStatus = new DBHelper().getCreditStatus();
+        assertEquals("APPROVED", paymentStatus);
+        assertEquals(transactionId, paymentID);
         assertNull(creditStatus);
     }
 }

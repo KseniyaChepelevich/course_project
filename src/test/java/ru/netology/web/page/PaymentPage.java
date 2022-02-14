@@ -47,7 +47,7 @@ public class PaymentPage {
 
 
     public void getNotificationOk() {
-        notificationStatusOk.shouldBe(visible, enabled).shouldHave(text("Операция одобрена Банком."), Duration.ofSeconds(3600));
+        notificationStatusOk.shouldBe(visible, enabled).shouldHave(text("Операция одобрена Банком."), Duration.ofSeconds(360));
     }
 
     public void getButtonSendARequest() {
@@ -91,15 +91,15 @@ public class PaymentPage {
         errorCardNumberFieldRequired.shouldBe(visible).shouldHave(text("Поле обязательно для заполнения"));
     }
 
-    public void wrongFormatMonthField() {
+    public void getWrongFormatMonthField() {
         errorCardNumberFieldRequired.shouldBe(visible).shouldHave(text("Неверно указан срок действия карты"));
     }
 
-    public void wrongFormatYearField() {
+    public void getWrongFormatYearField() {
         errorCardNumberFieldRequired.shouldBe(visible).shouldHave(text("Неверно указан срок действия карты"));
     }
 
-    public void wrongFormatOwnerField() {
+    public void getWrongFormatOwnerField() {
         errorCardNumberFieldRequired.shouldBe(visible).shouldHave(text("Неверный формат заполнения"));
     }
 

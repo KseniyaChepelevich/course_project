@@ -34,26 +34,26 @@ public class DBHelper {
         );
     }
 
-//    public static class DeleteInfo {
-//        @SneakyThrows
-//        public static void deletingData() {
-//            var deleteFromPaymentEntity = "DELETE FROM payment_entity;";
-//            var deleteFromCreditRequestEntity = "DELETE FROM credit_request_entity;";
-//            var deleteFromOrderEntity = "DELETE FROM order_entity;";
-//
-//            try (
-//                    var conn = DriverManager.getConnection(
-//                            "jdbc:mysql://localhost:3306/aqa-shop", "aqa", "mypass"
-//                    );
-//                    var deleteStmt = conn.createStatement();
-//            ) {
-//
-//                var paymentEntity = deleteStmt.executeUpdate(deleteFromPaymentEntity);
-//                var creditRequestEntity = deleteStmt.executeUpdate(deleteFromCreditRequestEntity);
-//                var orderEntity = deleteStmt.executeUpdate(deleteFromOrderEntity);
-//            }
-//        }
-//    }
+    public static class DeleteInfo {
+        @SneakyThrows
+        public static void deletingData() {
+            var deleteFromPaymentEntity = "DELETE FROM payment_entity;";
+            var deleteFromCreditRequestEntity = "DELETE FROM credit_request_entity;";
+            var deleteFromOrderEntity = "DELETE FROM order_entity;";
+
+            try (
+                    var conn = DriverManager.getConnection(
+                            "jdbc:mysql://localhost:3306/aqa-shop", "aqa", "mypass"
+                    );
+                    var deleteStmt = conn.createStatement();
+            ) {
+
+                var paymentEntity = deleteStmt.executeUpdate(deleteFromPaymentEntity);
+                var creditRequestEntity = deleteStmt.executeUpdate(deleteFromCreditRequestEntity);
+                var orderEntity = deleteStmt.executeUpdate(deleteFromOrderEntity);
+            }
+        }
+    }
 
 
     @SneakyThrows
@@ -78,8 +78,8 @@ public class DBHelper {
 
     @SneakyThrows
     public String getCreditId() {
-        var creditId = "SELECT credit_id FROM order_entity";
-        return creditId;
+        var creditId = "SELECT credit_id FROM order_entity ORDER BY created DESC LIMIT 1";
+        return runner.query(conn, creditId, new ScalarHandler<>());
     }
 
     @SneakyThrows
