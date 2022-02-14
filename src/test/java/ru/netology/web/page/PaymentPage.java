@@ -2,13 +2,18 @@ package ru.netology.web.page;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import lombok.SneakyThrows;
+import org.openqa.selenium.WebElement;
 import ru.netology.mode.DataHelper;
 
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selectors.withText;
+import static com.codeborne.selenide.Selenide.*;
+import static java.util.concurrent.TimeUnit.SECONDS;
+
 
 public class PaymentPage {
 
@@ -28,14 +33,33 @@ public class PaymentPage {
     private SelenideElement wrongFormatMonthField = $x("//*[text()='Месяц']/following-sibling::*/input[@class='input__sub']");
     private SelenideElement wrongFormatYearField = $x("//*[text()='Год']/following-sibling::*/input[@class='input__sub']");
     private SelenideElement wrongFormatOwnerField = $x("//*[text()='Владелец']/following-sibling::*/input[@class='input__sub']");
+    private SelenideElement notificationStatusError = $x("//*[text()='Ошибка! Банк отказал в проведении операции.']");
+    private SelenideElement buttonSendARequest = $x("//*[text()='Отправляем запрос в Банк...']");
+    //private SelenideElement notificationStatusError = $$(".notification__content").find(text("Ошибка! Банк отказал в проведении операции."));
+    //private SelenideElement notificationStatusError = $(withText("Ошибка! Банк отказал в проведении операции."));
+
+
 
 
     public PaymentPage() {
         headingCardPayment.shouldBe(visible);
     }
 
+
     public void getNotificationOk() {
-        notificationStatusOk.shouldBe(visible).shouldHave(Condition.text("Операция одобрена Банком."), Duration.ofSeconds(30));
+        notificationStatusOk.shouldBe(visible, enabled).shouldHave(text("Операция одобрена Банком."), Duration.ofSeconds(3600));
+    }
+
+    public void getButtonSendARequest() {
+        buttonSendARequest.shouldBe(visible, enabled).shouldHave(text("Отправляем запрос в Банк..."));
+    }
+
+    public void getNotificationError() {
+        notificationStatusError.shouldBe(visible, enabled).shouldHave(text("Ошибка! Банк отказал в проведении операции."), Duration.ofSeconds(120));
+    }
+
+    public void clickButtonContinue() {
+        buttonContinue.click();
     }
 
     public void fillingOutTheForm(DataHelper.CardInfo info) {
@@ -44,39 +68,39 @@ public class PaymentPage {
         fieldYear.setValue(info.getYear());
         fieldOwner.setValue(info.getOwner());
         fieldCVC.setValue(info.getCvc());
-        buttonContinue.click();
+        clickButtonContinue();
     }
 
     public void getErrorNotificationCardNumberRequired() {
-        errorCardNumberFieldRequired.shouldBe(visible).shouldHave(Condition.text("Поле обязательно для заполнения"));
+        errorCardNumberFieldRequired.shouldBe(visible).shouldHave(text("Поле обязательно для заполнения"));
     }
 
     public void getErrorNotificationMonthRequired() {
-        errorCardNumberFieldRequired.shouldBe(visible).shouldHave(Condition.text("Поле обязательно для заполнения"));
+        errorCardNumberFieldRequired.shouldBe(visible).shouldHave(text("Поле обязательно для заполнения"));
     }
 
     public void getErrorNotificationYearRequired() {
-        errorCardNumberFieldRequired.shouldBe(visible).shouldHave(Condition.text("Поле обязательно для заполнения"));
+        errorCardNumberFieldRequired.shouldBe(visible).shouldHave(text("Поле обязательно для заполнения"));
     }
 
     public void getErrorNotificationOwnerRequired() {
-        errorCardNumberFieldRequired.shouldBe(visible).shouldHave(Condition.text("Поле обязательно для заполнения"));
+        errorCardNumberFieldRequired.shouldBe(visible).shouldHave(text("Поле обязательно для заполнения"));
     }
 
     public void getErrorNotificationCVCRequired() {
-        errorCardNumberFieldRequired.shouldBe(visible).shouldHave(Condition.text("Поле обязательно для заполнения"));
+        errorCardNumberFieldRequired.shouldBe(visible).shouldHave(text("Поле обязательно для заполнения"));
     }
 
     public void wrongFormatMonthField() {
-        errorCardNumberFieldRequired.shouldBe(visible).shouldHave(Condition.text("Неверно указан срок действия карты"));
+        errorCardNumberFieldRequired.shouldBe(visible).shouldHave(text("Неверно указан срок действия карты"));
     }
 
     public void wrongFormatYearField() {
-        errorCardNumberFieldRequired.shouldBe(visible).shouldHave(Condition.text("Неверно указан срок действия карты"));
+        errorCardNumberFieldRequired.shouldBe(visible).shouldHave(text("Неверно указан срок действия карты"));
     }
 
     public void wrongFormatOwnerField() {
-        errorCardNumberFieldRequired.shouldBe(visible).shouldHave(Condition.text("Неверный формат заполнения"));
+        errorCardNumberFieldRequired.shouldBe(visible).shouldHave(text("Неверный формат заполнения"));
     }
 
 
