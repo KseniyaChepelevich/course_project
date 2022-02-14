@@ -278,7 +278,7 @@ public class PaymentTest {
     }
 
     @Test
-    public void shouldPaymentApprovedCardNameWithTwoLetter() {
+    public void shouldErrorOwnerFieldApprovedCardNameWithTwoLetter() {
         Configuration.holdBrowserOpen = true;
         val cardInfo = new DataHelper().getInvalidCardInfoWithLatinTwoLetterName();
         val paymentPage = new OrderPage().getPaymentPage();
@@ -308,6 +308,75 @@ public class PaymentTest {
         val creditStatus = new DBHelper().getCreditStatus();
         assertEquals("APPROVED", paymentStatus);
         assertEquals(transactionId, paymentID);
+        assertNull(creditStatus);
+    }
+
+    @Test
+    public void shouldPaymentApprovedCardNameWith21Letter() {
+        Configuration.holdBrowserOpen = true;
+        val cardInfo = new DataHelper().getInvalidCardInfoWithLatin21LetterName();
+        val paymentPage = new OrderPage().getPaymentPage();
+        paymentPage.fillingOutTheForm(cardInfo);
+        paymentPage.getNotificationOk();
+
+        val paymentStatus = new DBHelper().getPaymentStatus();
+        val transactionId = new DBHelper().getTransactionId();
+        val paymentID = new DBHelper().getPaymentId();
+        val creditStatus = new DBHelper().getCreditStatus();
+        assertEquals("APPROVED", paymentStatus);
+        assertEquals(transactionId, paymentID);
+        assertNull(creditStatus);
+    }
+
+    @Test
+    public void shouldPaymentApprovedCardNameWith22Letter() {
+        Configuration.holdBrowserOpen = true;
+        val cardInfo = new DataHelper().getInvalidCardInfoWithLatin22LetterName();
+        val paymentPage = new OrderPage().getPaymentPage();
+        paymentPage.fillingOutTheForm(cardInfo);
+    // добавить проверку на удалениепоследней буквы
+        paymentPage.getNotificationOk();
+
+        val paymentStatus = new DBHelper().getPaymentStatus();
+        val transactionId = new DBHelper().getTransactionId();
+        val paymentID = new DBHelper().getPaymentId();
+        val creditStatus = new DBHelper().getCreditStatus();
+        assertEquals("APPROVED", paymentStatus);
+        assertEquals(transactionId, paymentID);
+        assertNull(creditStatus);
+    }
+
+    @Test
+    public void shouldPaymentApprovedCardNameWith20Letter() {
+        Configuration.holdBrowserOpen = true;
+        val cardInfo = new DataHelper().getInvalidCardInfoWithLatin20LetterName();
+        val paymentPage = new OrderPage().getPaymentPage();
+        paymentPage.fillingOutTheForm(cardInfo);
+        paymentPage.getNotificationOk();
+
+        val paymentStatus = new DBHelper().getPaymentStatus();
+        val transactionId = new DBHelper().getTransactionId();
+        val paymentID = new DBHelper().getPaymentId();
+        val creditStatus = new DBHelper().getCreditStatus();
+        assertEquals("APPROVED", paymentStatus);
+        assertEquals(transactionId, paymentID);
+        assertNull(creditStatus);
+    }
+
+    @Test
+    public void shouldErrorMonthFieldApprovedCardNameWithTwoLetter() {
+        Configuration.holdBrowserOpen = true;
+        val cardInfo = new DataHelper().getVInvalidCardInfoLastMonth();
+        val paymentPage = new OrderPage().getPaymentPage();
+        paymentPage.fillingOutTheForm(cardInfo);
+        paymentPage.getWrongFormatMonthField();
+
+        val paymentStatus = new DBHelper().getPaymentStatus();
+        val transactionId = new DBHelper().getTransactionId();
+        val paymentID = new DBHelper().getPaymentId();
+        val creditStatus = new DBHelper().getCreditStatus();
+        assertNull(transactionId);
+        assertNull(paymentID);
         assertNull(creditStatus);
     }
 }
