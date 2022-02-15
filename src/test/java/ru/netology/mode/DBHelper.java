@@ -84,13 +84,13 @@ public class DBHelper {
 
     @SneakyThrows
     public String getTransactionId() {
-        var transactionId = "SELECT transaction_id FROM payment_entity ORDER BY created DESC LIMIT 1;";
+        var transactionId = "SELECT transaction_id FROM payment_entity ORDER BY created DESC LIMIT 1";
         return runner.query(conn, transactionId, new ScalarHandler<>());
     }
 
     @SneakyThrows
     public String getPaymentId() {
-        var paymentId = "SELECT payment_id FROM order ORDER BY created DESC LIMIT 1;";
+        var paymentId = "SELECT payment_id FROM order_entity ORDER BY created DESC LIMIT 1";
         return runner.query(conn, paymentId, new ScalarHandler<>());
     }
 

@@ -34,13 +34,15 @@ public class DataHelper {
 
     public  String generateMonth() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MM");
-        String date = LocalDate.now().plusMonths(3).format(format);
+        int randomNumber = ThreadLocalRandom.current().nextInt(13);
+        String date = LocalDate.now().plusMonths(randomNumber).format(format);
         return date;
     }
 
     public String generateYear() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yy");
-        String date = LocalDate.now().plusYears(3).format(format);
+        int randomNumber = ThreadLocalRandom.current().nextInt(6);
+        String date = LocalDate.now().plusYears(randomNumber).format(format);
         return date;
     }
 
@@ -161,6 +163,23 @@ public class DataHelper {
         return new CardInfo(getValidCardNumber(), generateMonth(), generateYear(), generateOwner(), generateCVC());
     }
 
+    public CardInfo getValidCardInfoEmptyYear() {
+        return new CardInfo(getValidCardNumber(), generateMonth(), "", generateOwner(), generateCVC());
+    }
+
+    public CardInfo getValidCardInfoEmptyOwner() {
+        return new CardInfo(getValidCardNumber(), "", generateYear(), generateOwner(), generateCVC());
+    }
+
+    public CardInfo getValidCardInfoEmptyMonth() {
+        return new CardInfo(getValidCardNumber(), generateMonth(), generateYear(), "", generateCVC());
+    }
+
+    public CardInfo getValidCardInfoEmptyCVC() {
+        return new CardInfo(getValidCardNumber(), generateMonth(), generateYear(), generateOwner(), "");
+    }
+
+
     public CardInfo getValidCardInfoWithNameWithoutSpace() {
         return new CardInfo(getValidCardNumber(), generateMonth(), generateYear(), generateOwnerNameWithoutSpace(), generateCVC());
     }
@@ -229,7 +248,7 @@ public class DataHelper {
         return new CardInfo(getValidCardNumber(), generateLastMonth(), generateCurrentYear(), generateOwner(), generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoCurrentMonth() {
+    public CardInfo getValidCardInfoCurrentMonth() {
         return new CardInfo(getValidCardNumber(), generateCurrentMonth(), generateCurrentYear(), generateOwner(), generateCVC());
     }
 
@@ -316,6 +335,8 @@ public class DataHelper {
     public CardInfo getInvalidCardInfo() {
         return new CardInfo(getInvalidCardNumber(), generateMonth(), generateYear(), generateOwner(), generateCVC());
     }
+
+
 
 
 

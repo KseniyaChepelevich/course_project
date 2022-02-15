@@ -1,18 +1,12 @@
 package ru.netology.web.page;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import lombok.SneakyThrows;
-import org.openqa.selenium.WebElement;
 import ru.netology.mode.DataHelper;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
-import static java.util.concurrent.TimeUnit.SECONDS;
 
 
 public class PaymentPage {
@@ -35,9 +29,6 @@ public class PaymentPage {
     private SelenideElement wrongFormatOwnerField = $x("//*[text()='Владелец']/following-sibling::*/input[@class='input__sub']");
     private SelenideElement notificationStatusError = $x("//*[text()='Ошибка! Банк отказал в проведении операции.']");
     private SelenideElement buttonSendARequest = $x("//*[text()='Отправляем запрос в Банк...']");
-    //private SelenideElement notificationStatusError = $$(".notification__content").find(text("Ошибка! Банк отказал в проведении операции."));
-    //private SelenideElement notificationStatusError = $(withText("Ошибка! Банк отказал в проведении операции."));
-
 
 
 
@@ -47,7 +38,7 @@ public class PaymentPage {
 
 
     public void getNotificationOk() {
-        notificationStatusOk.shouldBe(visible, enabled).shouldHave(text("Операция одобрена Банком."), Duration.ofSeconds(360));
+        notificationStatusOk.shouldBe(visible, Duration.ofSeconds(15)).shouldHave(text("Операция одобрена Банком."));
     }
 
     public void getButtonSendARequest() {
@@ -102,6 +93,70 @@ public class PaymentPage {
     public void getWrongFormatOwnerField() {
         errorCardNumberFieldRequired.shouldBe(visible).shouldHave(text("Неверный формат заполнения"));
     }
+
+    public void notGetErrorNotificationOwnerRequired() {
+        errorCardNumberFieldRequired.shouldBe(hidden);
+    }
+
+    public void notGetErrorNotificationCardNumberRequired() {
+        errorCardNumberFieldRequired.shouldBe(hidden);
+    }
+
+    public void notGetErrorNotificationMonthRequired() {
+        errorCardNumberFieldRequired.shouldBe(hidden);
+    }
+
+    public void notGetErrorNotificationYearRequired() {
+        errorCardNumberFieldRequired.shouldBe(hidden);
+    }
+
+    public void notGetErrorNotificationCVCRequired() {
+        errorCardNumberFieldRequired.shouldBe(hidden);
+    }
+
+    public void notGetWrongFormatMonthField() {
+        errorCardNumberFieldRequired.shouldBe(hidden);
+    }
+
+    public void notGetWrongFormatYearField() {
+        errorCardNumberFieldRequired.shouldBe(hidden);
+    }
+
+    public void notGetWrongFormatOwnerField() {
+        errorCardNumberFieldRequired.shouldBe(hidden);
+    }
+
+    public String getValue(SelenideElement field) {
+        String fieldValue = field.val();
+        return fieldValue;
+    }
+
+    public String getValueOwner(){
+       return getValue(fieldOwner);
+    }
+
+    public String getValueMonth(){
+        return getValue(fieldMonth);
+    }
+
+    public String getValueYear(){
+        return getValue(fieldYear);
+    }
+
+    public String getValueCVC(){
+        return getValue(fieldCVC);
+    }
+
+    public static String removeLastChar(String s) {
+        return (s == null || s.length() == 0) ? null : (s.substring(0, s.length() - 1));
+    }
+
+
+
+
+
+
+
 
 
 
