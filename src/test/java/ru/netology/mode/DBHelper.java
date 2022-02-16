@@ -34,27 +34,24 @@ public class DBHelper {
         );
     }
 
-    public static class DeleteInfo {
-        @SneakyThrows
-        public static void deletingData() {
-            var deleteFromPaymentEntity = "DELETE FROM payment_entity;";
-            var deleteFromCreditRequestEntity = "DELETE FROM credit_request_entity;";
-            var deleteFromOrderEntity = "DELETE FROM order_entity;";
+    @SneakyThrows
+    public static void deletingData() {
+        var deleteFromPaymentEntity = "DELETE FROM payment_entity;";
+        var deleteFromCreditRequestEntity = "DELETE FROM credit_request_entity;";
+        var deleteFromOrderEntity = "DELETE FROM order_entity;";
 
-            try (
-                    var conn = DriverManager.getConnection(
-                            "jdbc:mysql://localhost:3306/aqa-shop", "aqa", "mypass"
-                    );
-                    var deleteStmt = conn.createStatement();
-            ) {
+        try (
+                var conn = DriverManager.getConnection(
+                        "jdbc:mysql://localhost:3306/aqa-shop", "aqa", "mypass"
+                );
+                var deleteStmt = conn.createStatement();
+        ) {
 
-                var paymentEntity = deleteStmt.executeUpdate(deleteFromPaymentEntity);
-                var creditRequestEntity = deleteStmt.executeUpdate(deleteFromCreditRequestEntity);
-                var orderEntity = deleteStmt.executeUpdate(deleteFromOrderEntity);
-            }
+            var paymentEntity = deleteStmt.executeUpdate(deleteFromPaymentEntity);
+            var creditRequestEntity = deleteStmt.executeUpdate(deleteFromCreditRequestEntity);
+            var orderEntity = deleteStmt.executeUpdate(deleteFromOrderEntity);
         }
     }
-
 
     @SneakyThrows
     public String getPaymentStatus() {
@@ -62,19 +59,11 @@ public class DBHelper {
         return runner.query(conn, status, new ScalarHandler<>());
     }
 
-//    @SneakyThrows
-//    public String getPaymentAmount() {
-//        var status = "SELECT amount FROM payment_entity";
-//        return status;
-//    }
-
     @SneakyThrows
     public String getCreditStatus() {
         var status = "SELECT status FROM credit_request_entity ORDER BY created DESC LIMIT 1;";
         return runner.query(conn, status, new ScalarHandler<>());
     }
-
-//"SELECT status FROM payment_entity JOIN order_entity ON order_entity.payment_id = payment_entity.transaction_id ORDER BY created DESC LIMIT 1;";
 
     @SneakyThrows
     public String getCreditId() {
@@ -93,10 +82,4 @@ public class DBHelper {
         var paymentId = "SELECT payment_id FROM order_entity ORDER BY created DESC LIMIT 1";
         return runner.query(conn, paymentId, new ScalarHandler<>());
     }
-
-//    @SneakyThrows
-//    public String getPayment() {
-//        var paymentId = "SELECT payment_id, status FROM payment_entity JOIN order_entity ON payment_entity.payment_id = order_entity.payment_id;";
-//    }
-
 }
