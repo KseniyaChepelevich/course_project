@@ -25,9 +25,8 @@ public class PaymentTest {
     }
 
 
-
     @BeforeEach
-    void setUp(){
+    void setUp() {
         open("http://localhost:8080");
     }
 
@@ -58,9 +57,6 @@ public class PaymentTest {
         assertEquals(transactionId, paymentID);
         assertNull(creditStatus);
     }
-
-
-
 
 
     //Тест №2
@@ -222,7 +218,8 @@ public class PaymentTest {
         paymentPage.getErrorNotificationMonthRequired();
         //Проверяем, что нет лишних сообщений об ошибках
         paymentPage.notGetErrorNotificationCardNumberRequired();
-        paymentPage.notGetErrorNotificationOwnerRequired();;
+        paymentPage.notGetErrorNotificationOwnerRequired();
+        ;
         paymentPage.notGetErrorNotificationYearRequired();
         paymentPage.notGetErrorNotificationCVCRequired();
         paymentPage.notGetWrongFormatYearField();
@@ -245,7 +242,8 @@ public class PaymentTest {
         paymentPage.getErrorNotificationYearRequired();
         //Проверяем, что нет лишних сообщений об ошибках
         paymentPage.notGetErrorNotificationCardNumberRequired();
-        paymentPage.notGetErrorNotificationOwnerRequired();;
+        paymentPage.notGetErrorNotificationOwnerRequired();
+        ;
         paymentPage.notGetErrorNotificationMonthRequired();
         paymentPage.notGetErrorNotificationCVCRequired();
         paymentPage.notGetWrongFormatMonthField();
@@ -346,7 +344,7 @@ public class PaymentTest {
         val paymentID = new DBHelper().getPaymentId();
         val creditStatus = new DBHelper().getCreditStatus();
         //Проверяем игнорирует ли поле Владелец пробел в начале имени
-        assertEquals(expectedValueOwner, actualValueOwner );
+        assertEquals(expectedValueOwner, actualValueOwner);
         assertEquals("APPROVED", paymentStatus);
         assertEquals(transactionId, paymentID);
         assertNull(creditStatus);
@@ -584,7 +582,7 @@ public class PaymentTest {
     @Test
     public void shouldPaymentApprovedCardMonthWithASpaceInTheMiddle() {
         Configuration.holdBrowserOpen = true;
-        val cardInfo = new DataHelper().getInvalidCardInfoMonthWithASpaceInThrMiddle();
+        val cardInfo = new DataHelper().getInvalidCardInfoMonthWithASpaceInTheMiddle();
         val paymentPage = new OrderPage().getPaymentPage();
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getNotificationOk();

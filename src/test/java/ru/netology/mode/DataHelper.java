@@ -2,21 +2,10 @@ package ru.netology.mode;
 
 import com.github.javafaker.Faker;
 import lombok.Value;
-import lombok.experimental.UtilityClass;
-import org.junit.jupiter.api.Test;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.Month;
-import java.time.Year;
-import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 import java.util.concurrent.ThreadLocalRandom;
-
 
 public class DataHelper {
 
@@ -30,124 +19,82 @@ public class DataHelper {
         return "5555 6666 7777 8888";
     }
 
+    public String generateDate(int plusMonth, String formatPattern) {
+        return LocalDate.now().plusMonths(plusMonth).format(DateTimeFormatter.ofPattern(formatPattern));
+    }
 
-
-    public  String generateMonth() {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("MM");
-        int randomNumber = ThreadLocalRandom.current().nextInt(13);
-        String date = LocalDate.now().plusMonths(randomNumber).format(format);
+    public String getValidDate() {
+        int randomNumber = ThreadLocalRandom.current().nextInt(60);
+        String date = generateDate(randomNumber, "MM.yy");
         return date;
     }
 
-    public String generateYear() {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yy");
-        int randomNumber = ThreadLocalRandom.current().nextInt(6);
-        String date = LocalDate.now().plusYears(randomNumber).format(format);
+    public String getLastMonth() {
+        String date = generateDate(-1, "MM.yy");
         return date;
     }
 
-    public String generateOwner(){
+    public String getCurrentMonth() {
+        String date = generateDate(0, "MM.yy");
+        return date;
+    }
+
+    public String getLastYear() {
+        String date = generateDate(-12, "MM.yy");
+        return date;
+    }
+
+    public String getUnrealYear() {
+        String date = generateDate(300, "MM.yy");
+        return date;
+    }
+
+    public String getPlus6Year() {
+        String date = generateDate(72, "MM.yy");
+        return date;
+    }
+
+    public String getPlus5Year() {
+        String date = generateDate(60, "yy");
+        return date;
+    }
+
+    public String getPlus4Year() {
+        String date = generateDate(48, "yy");
+        return date;
+    }
+
+    public String generateOwner() {
         String owner = faker.name().firstName() + " " + faker.name().lastName();
         return owner;
     }
 
-    public String generateCVC(){
+    public String generateCVC() {
         return (faker.numerify("###"));
     }
 
-    public String generateOwnerNameWithoutSpace(){
+    public String generateOwnerNameWithoutSpace() {
         String owner = faker.name().firstName() + faker.name().lastName();
         return owner;
     }
 
-    public String generateOwnerToUpperCase(){
+    public String generateOwnerToUpperCase() {
         String owner = faker.name().firstName().toUpperCase() + " " + faker.name().lastName().toUpperCase();
         return owner;
     }
 
-    public String generateOwnerToLowerCase(){
+    public String generateOwnerToLowerCase() {
         String owner = faker.name().firstName().toLowerCase() + " " + faker.name().lastName().toLowerCase();
         return owner;
     }
 
-    public  String generateLastMonth() {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("MM");
-        String date = LocalDate.now().plusMonths(-3).format(format);
-        return date;
-    }
-
-    public  String generateCurrentMonth() {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("MM");
-        String date = LocalDate.now().format(format);
-        return date;
-    }
-
-    public String generateCurrentYear() {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yy");
-        String date = LocalDate.now().format(format);
-        return date;
-    }
-
-    public String generateLastYear() {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yy");
-        String date = LocalDate.now().plusYears(-1).format(format);
-        return date;
-    }
-
-    public String generateUnrealYear() {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yy");
-        String date = LocalDate.now().plusYears(25).format(format);
-        return date;
-    }
-
-    public String generatePlus6Year() {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yy");
-        String date = LocalDate.now().plusYears(6).format(format);
-        return date;
-    }
-
-    public String generatePlus5Year() {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yy");
-        String date = LocalDate.now().plusYears(5).format(format);
-        return date;
-    }
-
-    public String generatePlus4Year() {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yy");
-        String date = LocalDate.now().plusYears(4).format(format);
-        return date;
-    }
-
-    public String generateCVC4Numbers(){
+    public String generateCVC4Numbers() {
         return (faker.numerify("####"));
     }
 
-    public String generateCVC2Numbers(){
+    public String generateCVC2Numbers() {
         return (faker.numerify("##"));
     }
-
-
-
-
-
-//    public static String generateValidMonth() {
-//        Month now = Month.
-//        int randomNumber = ThreadLocalRandom.current().nextInt(13);
-//
-//        Month randomDate = now.plusMonths(randomNumber);
-//        DateFormat df = new SimpleDateFormat("MM");
-//        return (df.format(randomDate.getMonthValue()));
-//        var d1 = LocalDate.now();
-//        var d2 = LocalDate.now().plusYears(5);
-//        Date randomYear = new Date(ThreadLocalRandom.current().nextLong(d1.getYear(), d2.getYear()));
-//        DateFormat df = new SimpleDateFormat("yy");
-//        return (df.format(randomYear));
-//    }
-
-
-
-
-
 
     @Value
     public static class CardInfo {
@@ -156,201 +103,183 @@ public class DataHelper {
         private String year;
         private String owner;
         private String cvc;
-
     }
 
     public CardInfo getValidCardInfo() {
-        return new CardInfo(getValidCardNumber(), generateMonth(), generateYear(), generateOwner(), generateCVC());
+        return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), generateOwner(), generateCVC());
     }
 
     public CardInfo getValidCardInfoEmptyYear() {
-        return new CardInfo(getValidCardNumber(), generateMonth(), "", generateOwner(), generateCVC());
-    }
-
-    public CardInfo getValidCardInfoEmptyOwner() {
-        return new CardInfo(getValidCardNumber(), "", generateYear(), generateOwner(), generateCVC());
+        return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), "", generateOwner(), generateCVC());
     }
 
     public CardInfo getValidCardInfoEmptyMonth() {
-        return new CardInfo(getValidCardNumber(), generateMonth(), generateYear(), "", generateCVC());
+        return new CardInfo(getValidCardNumber(), "", getValidDate().substring(3), generateOwner(), generateCVC());
+    }
+
+    public CardInfo getValidCardInfoEmptyOwner() {
+        return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), "", generateCVC());
     }
 
     public CardInfo getValidCardInfoEmptyCVC() {
-        return new CardInfo(getValidCardNumber(), generateMonth(), generateYear(), generateOwner(), "");
+        return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), generateOwner(), "");
     }
-
 
     public CardInfo getValidCardInfoWithNameWithoutSpace() {
-        return new CardInfo(getValidCardNumber(), generateMonth(), generateYear(), generateOwnerNameWithoutSpace(), generateCVC());
+        return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), generateOwnerNameWithoutSpace(), generateCVC());
     }
 
-    public CardInfo getValidCardInfoNameInLatinWithAHyphen(){
-        return new CardInfo(getValidCardNumber(), generateMonth(), generateYear(), "Mihail Petrov-Vodkin", generateCVC());
+    public CardInfo getValidCardInfoNameInLatinWithAHyphen() {
+        return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), "Mihail Petrov-Vodkin", generateCVC());
     }
 
-    public CardInfo getValidCardInfoNameInLatinWithADot(){
-        return new CardInfo(getValidCardNumber(), generateMonth(), generateYear(), "M. Petrov-Vodkin", generateCVC());
+    public CardInfo getValidCardInfoNameInLatinWithADot() {
+        return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(2), "M. Petrov-Vodkin", generateCVC());
     }
 
-    public CardInfo getValidCardInfoNameToUpperCase(){
-        return new CardInfo(getValidCardNumber(), generateMonth(), generateYear(), generateOwnerToUpperCase(), generateCVC());
+    public CardInfo getValidCardInfoNameToUpperCase() {
+        return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(2), generateOwnerToUpperCase(), generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoNameToLowerCase(){
-        return new CardInfo(getValidCardNumber(), generateMonth(), generateYear(), generateOwnerToLowerCase(), generateCVC());
+    public CardInfo getInvalidCardInfoNameToLowerCase() {
+        return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), generateOwnerToLowerCase(), generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoNameInCyrillic(){
-        return new CardInfo(getValidCardNumber(), generateMonth(), generateYear(), "Иванов Иван", generateCVC());
+    public CardInfo getInvalidCardInfoNameInCyrillic() {
+        return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), "Иванов Иван", generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoWithHieroglyphsName(){
-        return new CardInfo(getValidCardNumber(), generateMonth(), generateYear(), "小名小名", generateCVC());
+    public CardInfo getInvalidCardInfoWithHieroglyphsName() {
+        return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), "小名小名", generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoWithNumbersName(){
-        return new CardInfo(getValidCardNumber(), generateMonth(), generateYear(), "345126586", generateCVC());
+    public CardInfo getInvalidCardInfoWithNumbersName() {
+        return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), "345126586", generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoWithNonNumericAndNonAlphabeticCharactersName(){
-        return new CardInfo(getValidCardNumber(), generateMonth(), generateYear(), "+*-=№?", generateCVC());
+    public CardInfo getInvalidCardInfoWithNonNumericAndNonAlphabeticCharactersName() {
+        return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), "+*-=№?", generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoWithLatinNameWithASpaceAtTheBeginning(){
-        return new CardInfo(getValidCardNumber(), generateMonth(), generateYear(), " " + generateOwner(), generateCVC());
+    public CardInfo getInvalidCardInfoWithLatinNameWithASpaceAtTheBeginning() {
+        return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), " " + generateOwner(), generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoWithLatinThreeLetterName(){
-        return new CardInfo(getValidCardNumber(), generateMonth(), generateYear(), "Yan", generateCVC());
+    public CardInfo getInvalidCardInfoWithLatinThreeLetterName() {
+        return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), "Yan", generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoWithLatinTwoLetterName(){
-        return new CardInfo(getValidCardNumber(), generateMonth(), generateYear(), "In", generateCVC());
+    public CardInfo getInvalidCardInfoWithLatinTwoLetterName() {
+        return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), "In", generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoWithLatinFourLetterName(){
-        return new CardInfo(getValidCardNumber(), generateMonth(), generateYear(), "Yana", generateCVC());
+    public CardInfo getInvalidCardInfoWithLatinFourLetterName() {
+        return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), "Yana", generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoWithLatin21LetterName(){
-        return new CardInfo(getValidCardNumber(), generateMonth(), generateYear(), "Innokentiy Kozlovskiy", generateCVC());
+    public CardInfo getInvalidCardInfoWithLatin21LetterName() {
+        return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), "Innokentiy Kozlovskiy", generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoWithLatin22LetterName(){
-        return new CardInfo(getValidCardNumber(), generateMonth(), generateYear(), "Innokentiy Kozelovskiy", generateCVC());
+    public CardInfo getInvalidCardInfoWithLatin22LetterName() {
+        return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), "Innokentiy Kozelovskiy", generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoWithLatin20LetterName(){
-        return new CardInfo(getValidCardNumber(), generateMonth(), generateYear(), "Innokentiy Kozlovski", generateCVC());
+    public CardInfo getInvalidCardInfoWithLatin20LetterName() {
+        return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), "Innokentiy Kozlovski", generateCVC());
     }
 
     public CardInfo getVInvalidCardInfoLastMonth() {
-        return new CardInfo(getValidCardNumber(), generateLastMonth(), generateCurrentYear(), generateOwner(), generateCVC());
+        return new CardInfo(getValidCardNumber(), getLastMonth().substring(0, 2), getLastMonth().substring(3), generateOwner(), generateCVC());
     }
 
     public CardInfo getValidCardInfoCurrentMonth() {
-        return new CardInfo(getValidCardNumber(), generateCurrentMonth(), generateCurrentYear(), generateOwner(), generateCVC());
+        return new CardInfo(getValidCardNumber(), getCurrentMonth().substring(0, 2), getCurrentMonth().substring(3), generateOwner(), generateCVC());
     }
 
     public CardInfo getInvalidCardInfoNonExistentMonth() {
-        return new CardInfo(getValidCardNumber(), "22", generateCurrentYear(), generateOwner(), generateCVC());
+        return new CardInfo(getValidCardNumber(), "22", getLastMonth().substring(3), generateOwner(), generateCVC());
     }
 
     public CardInfo getInvalidCardInfo00Month() {
-        return new CardInfo(getValidCardNumber(), "00", generateCurrentYear(), generateOwner(), generateCVC());
+        return new CardInfo(getValidCardNumber(), "00", generateDate(0, "yy"), generateOwner(), generateCVC());
     }
 
     public CardInfo getInvalidCardInfoNegativeMeaningMonth() {
-        return new CardInfo(getValidCardNumber(), "-01", generateYear(), generateOwner(), generateCVC());
+        return new CardInfo(getValidCardNumber(), "-01", generateDate(0, "yy"), generateOwner(), generateCVC());
     }
 
     public CardInfo getInvalidCardInfoMonthWithASpaceAtTheBeginning() {
-        return new CardInfo(getValidCardNumber(), " " + generateMonth(), generateYear(), generateOwner(), generateCVC());
+        return new CardInfo(getValidCardNumber(), " " + getLastMonth().substring(0, 2), getLastMonth().substring(3), generateOwner(), generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoMonthWithASpaceInThrMiddle() {
-        return new CardInfo(getValidCardNumber(), "0 5", generateYear(), generateOwner(), generateCVC());
+    public CardInfo getInvalidCardInfoMonthWithASpaceInTheMiddle() {
+        return new CardInfo(getValidCardNumber(), "0 5", getLastMonth().substring(3), generateOwner(), generateCVC());
     }
 
     public CardInfo getInvalidCardInfoMonthWithNonAlphabeticCharacters() {
-        return new CardInfo(getValidCardNumber(), "*/", generateYear(), generateOwner(), generateCVC());
+        return new CardInfo(getValidCardNumber(), "*/", getLastMonth().substring(3), generateOwner(), generateCVC());
     }
 
     public CardInfo getInvalidCardInfoMonthWithAlphabeticCharacters() {
-        return new CardInfo(getValidCardNumber(), "ab", generateYear(), generateOwner(), generateCVC());
+        return new CardInfo(getValidCardNumber(), "ab", getLastMonth().substring(3), generateOwner(), generateCVC());
     }
 
     public CardInfo getInvalidCardInfoLastYear() {
-        return new CardInfo(getValidCardNumber(), generateMonth(), generateLastYear(), generateOwner(), generateCVC());
+        return new CardInfo(getValidCardNumber(), getLastYear().substring(0, 2), getLastYear().substring(3), generateOwner(), generateCVC());
     }
 
     public CardInfo getInvalidCardInfoUnrealYear() {
-        return new CardInfo(getValidCardNumber(), generateMonth(), generateUnrealYear(), generateOwner(), generateCVC());
+        return new CardInfo(getValidCardNumber(), getUnrealYear().substring(0, 2), getUnrealYear().substring(3), generateOwner(), generateCVC());
     }
 
     public CardInfo getInvalidCardInfo00Year() {
-        return new CardInfo(getValidCardNumber(), generateMonth(), "00", generateOwner(), generateCVC());
+        return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), "00", generateOwner(), generateCVC());
     }
 
     public CardInfo getInvalidCardInfoNegativeNumberYear() {
-        return new CardInfo(getValidCardNumber(), generateMonth(), "-" + generateYear(), generateOwner(), generateCVC());
+        return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), "-" + getValidDate().substring(3), generateOwner(), generateCVC());
     }
 
     public CardInfo getInvalidCardInfoYearPlus6() {
-        return new CardInfo(getValidCardNumber(), generateMonth(), generatePlus6Year(), generateOwner(), generateCVC());
+        return new CardInfo(getValidCardNumber(), getPlus6Year().substring(0, 2), getPlus6Year().substring(3), generateOwner(), generateCVC());
     }
 
     public CardInfo getInvalidCardInfoYearPlus5() {
-        return new CardInfo(getValidCardNumber(), generateMonth(), generatePlus5Year(), generateOwner(), generateCVC());
+        return new CardInfo(getValidCardNumber(), getPlus5Year().substring(0, 2), getPlus5Year().substring(3), generateOwner(), generateCVC());
     }
 
     public CardInfo getInvalidCardInfoYearPlus4() {
-        return new CardInfo(getValidCardNumber(), generateMonth(), generatePlus4Year(), generateOwner(), generateCVC());
+        return new CardInfo(getValidCardNumber(), getPlus4Year().substring(0, 2), getPlus4Year().substring(3), generateOwner(), generateCVC());
     }
 
     public CardInfo getInvalidCardInfoYearWithNonAlphabeticCharacters() {
-        return new CardInfo(getValidCardNumber(), generateMonth(), "*/", generateOwner(), generateCVC());
+        return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), "*/", generateOwner(), generateCVC());
     }
 
     public CardInfo getInvalidCardInfoYearWithAlphabeticCharacters() {
-        return new CardInfo(getValidCardNumber(), generateMonth(), "ab", generateOwner(), generateCVC());
+        return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), "ab", generateOwner(), generateCVC());
     }
 
     public CardInfo getInvalidCardInfoCVCWithNonAlphabeticCharacters() {
-        return new CardInfo(getValidCardNumber(), generateMonth(), generateYear(), generateOwner(), "*/=");
+        return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), generateOwner(), "*/=");
     }
 
     public CardInfo getInvalidCardInfoCVCWithAlphabeticCharacters() {
-        return new CardInfo(getValidCardNumber(), generateMonth(), generateYear(), generateOwner(), "abc");
+        return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), generateOwner(), "abc");
     }
 
     public CardInfo getInvalidCardInfoCVCWith2Numbers() {
-        return new CardInfo(getValidCardNumber(), generateMonth(), generateYear(), generateOwner(), generateCVC2Numbers());
+        return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), generateOwner(), generateCVC2Numbers());
     }
 
     public CardInfo getInvalidCardInfoCVCWith4Numbers() {
-        return new CardInfo(getValidCardNumber(), generateMonth(), generateYear(), generateOwner(), generateCVC4Numbers());
+        return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), generateOwner(), generateCVC4Numbers());
     }
 
     public CardInfo getInvalidCardInfo() {
-        return new CardInfo(getInvalidCardNumber(), generateMonth(), generateYear(), generateOwner(), generateCVC());
+        return new CardInfo(getInvalidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), generateOwner(), generateCVC());
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
