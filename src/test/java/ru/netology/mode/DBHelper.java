@@ -1,6 +1,7 @@
 package ru.netology.mode;
 
 import lombok.SneakyThrows;
+import lombok.experimental.UtilityClass;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
@@ -10,12 +11,16 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Properties;
 
+@UtilityClass
+
 public class DBHelper {
+    private DBHelper() {}
+
     private final QueryRunner runner = new QueryRunner();
     private Properties prop = prop();
     private final Connection conn = getConnect();
 
-    private Properties prop() {
+    public static Properties prop() {
         Properties properties = new Properties();
         try (InputStream is = DBHelper.class.getClassLoader().getResourceAsStream("application.properties")) {
             properties.load(is);
@@ -26,7 +31,7 @@ public class DBHelper {
     }
 
     @SneakyThrows
-    private Connection getConnect() {
+    public static Connection getConnect() {
         return DriverManager.getConnection(
                 prop.getProperty("spring.datasource.url"),
                 prop.getProperty("spring.datasource.username"),
@@ -54,31 +59,31 @@ public class DBHelper {
     }
 
     @SneakyThrows
-    public String getPaymentStatus() {
+    public static String getPaymentStatus() {
         var status = "SELECT status FROM payment_entity ORDER BY created DESC LIMIT 1;";
         return runner.query(conn, status, new ScalarHandler<>());
     }
 
     @SneakyThrows
-    public String getCreditStatus() {
+    public static String getCreditStatus() {
         var status = "SELECT status FROM credit_request_entity ORDER BY created DESC LIMIT 1;";
         return runner.query(conn, status, new ScalarHandler<>());
     }
 
     @SneakyThrows
-    public String getCreditId() {
+    public static String getCreditId() {
         var creditId = "SELECT credit_id FROM order_entity ORDER BY created DESC LIMIT 1";
         return runner.query(conn, creditId, new ScalarHandler<>());
     }
 
     @SneakyThrows
-    public String getTransactionId() {
+    public static String getTransactionId() {
         var transactionId = "SELECT transaction_id FROM payment_entity ORDER BY created DESC LIMIT 1";
         return runner.query(conn, transactionId, new ScalarHandler<>());
     }
 
     @SneakyThrows
-    public String getPaymentId() {
+    public static String getPaymentId() {
         var paymentId = "SELECT payment_id FROM order_entity ORDER BY created DESC LIMIT 1";
         return runner.query(conn, paymentId, new ScalarHandler<>());
     }

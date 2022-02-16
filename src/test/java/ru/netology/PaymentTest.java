@@ -32,7 +32,7 @@ public class PaymentTest {
 
     @BeforeEach
     void deletingDataFromTheDb() {
-        DBHelper.DeleteInfo.deletingData();
+        DBHelper.deletingData();
     }
 
     @AfterAll
@@ -49,10 +49,10 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getButtonSendARequest();
         paymentPage.getNotificationOk();
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val creditStatus = new DBHelper().getCreditStatus();
-        val paymentID = new DBHelper().getPaymentId();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val creditStatus = DBHelper.getCreditStatus();
+        val paymentID = DBHelper.getPaymentId();
         assertEquals("APPROVED", paymentStatus);
         assertEquals(transactionId, paymentID);
         assertNull(creditStatus);
@@ -67,10 +67,10 @@ public class PaymentTest {
         val paymentPage = new OrderPage().getPaymentPage();
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getNotificationOk();
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertEquals("APPROVED", paymentStatus);
         assertEquals(transactionId, paymentID);
         assertNull(creditStatus);
@@ -84,10 +84,10 @@ public class PaymentTest {
         val paymentPage = new OrderPage().getPaymentPage();
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getNotificationOk();
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertEquals("APPROVED", paymentStatus);
         assertEquals(transactionId, paymentID);
         assertNull(creditStatus);
@@ -101,10 +101,10 @@ public class PaymentTest {
         val paymentPage = new OrderPage().getPaymentPage();
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getNotificationOk();
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertEquals("APPROVED", paymentStatus);
         assertEquals(transactionId, paymentID);
         assertNull(creditStatus);
@@ -118,10 +118,10 @@ public class PaymentTest {
         val paymentPage = new OrderPage().getPaymentPage();
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getNotificationOk();
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertEquals("APPROVED", paymentStatus);
         assertEquals(transactionId, paymentID);
         assertNull(creditStatus);
@@ -137,9 +137,9 @@ public class PaymentTest {
         paymentPage.getWrongFormatOwnerField();
         //Проверить, что не появилось новых записей в бд
         //val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertNull(transactionId);
         assertNull(paymentID);
         assertNull(creditStatus);
@@ -152,8 +152,8 @@ public class PaymentTest {
         Configuration.holdBrowserOpen = true;
         val paymentPage = new OrderPage().getPaymentPage();
         paymentPage.clickButtonContinue();
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val creditStatus = DBHelper.getCreditStatus();
         paymentPage.getErrorNotificationCardNumberRequired();
         paymentPage.getErrorNotificationMonthRequired();
         paymentPage.getErrorNotificationYearRequired();
@@ -180,9 +180,9 @@ public class PaymentTest {
         paymentPage.notGetWrongFormatOwnerField();
         paymentPage.notGetWrongFormatYearField();
         //Проверяем, что не появилось в бд записей
-        val transactionId = new DBHelper().getTransactionId();
-        val creditStatus = new DBHelper().getCreditStatus();
-        val paymentID = new DBHelper().getPaymentId();
+        val transactionId = DBHelper.getTransactionId();
+        val creditStatus = DBHelper.getCreditStatus();
+        val paymentID = DBHelper.getPaymentId();
         assertNull(transactionId);
         assertNull(creditStatus);
     }
@@ -202,9 +202,9 @@ public class PaymentTest {
         paymentPage.notGetWrongFormatYearField();
         paymentPage.notGetWrongFormatMonthField();
         //Проверяем, что не появилось в бд записей
-        val transactionId = new DBHelper().getTransactionId();
-        val creditStatus = new DBHelper().getCreditStatus();
-        val paymentID = new DBHelper().getPaymentId();
+        val transactionId = DBHelper.getTransactionId();
+        val creditStatus = DBHelper.getCreditStatus();
+        val paymentID = DBHelper.getPaymentId();
         assertNull(transactionId);
         assertNull(creditStatus);
     }
@@ -225,10 +225,10 @@ public class PaymentTest {
         paymentPage.notGetWrongFormatYearField();
         paymentPage.notGetWrongFormatOwnerField();
         //Проверяем, что не появилось в бд записей
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val creditStatus = new DBHelper().getCreditStatus();
-        val paymentID = new DBHelper().getPaymentId();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val creditStatus = DBHelper.getCreditStatus();
+        val paymentID = DBHelper.getPaymentId();
         assertNull(transactionId);
         assertNull(creditStatus);
     }
@@ -249,10 +249,10 @@ public class PaymentTest {
         paymentPage.notGetWrongFormatMonthField();
         paymentPage.notGetWrongFormatOwnerField();
         //Проверяем, что не появилось в бд записей
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val creditStatus = new DBHelper().getCreditStatus();
-        val paymentID = new DBHelper().getPaymentId();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val creditStatus = DBHelper.getCreditStatus();
+        val paymentID = DBHelper.getPaymentId();
         assertNull(transactionId);
         assertNull(creditStatus);
     }
@@ -266,9 +266,9 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getWrongFormatOwnerField();
         //Проверить, что не появилось новых записей в бд
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertNull(transactionId);
         assertNull(paymentID);
         assertNull(creditStatus);
@@ -283,9 +283,9 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getWrongFormatOwnerField();
         //Проверить, что не появилось новых записей в бд
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertNull(transactionId);
         assertNull(paymentID);
         assertNull(creditStatus);
@@ -300,9 +300,9 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getWrongFormatOwnerField();
         //Проверить, что не появилось новых записей в бд
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertNull(transactionId);
         assertNull(paymentID);
         assertNull(creditStatus);
@@ -317,9 +317,9 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getWrongFormatOwnerField();
         //Проверить, что не появилось новых записей в бд
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertNull(transactionId);
         assertNull(paymentID);
         assertNull(creditStatus);
@@ -339,10 +339,10 @@ public class PaymentTest {
 
         paymentPage.getNotificationOk();
 
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         //Проверяем игнорирует ли поле Владелец пробел в начале имени
         assertEquals(expectedValueOwner, actualValueOwner);
         assertEquals("APPROVED", paymentStatus);
@@ -359,10 +359,10 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getNotificationOk();
 
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertEquals("APPROVED", paymentStatus);
         assertEquals(transactionId, paymentID);
         assertNull(creditStatus);
@@ -377,10 +377,10 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getWrongFormatOwnerField();
 
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertNull(transactionId);
         assertNull(paymentID);
         assertNull(creditStatus);
@@ -395,10 +395,10 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getNotificationOk();
 
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertEquals("APPROVED", paymentStatus);
         assertEquals(transactionId, paymentID);
         assertNull(creditStatus);
@@ -413,10 +413,10 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getNotificationOk();
 
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertEquals("APPROVED", paymentStatus);
         assertEquals(transactionId, paymentID);
         assertNull(creditStatus);
@@ -434,10 +434,10 @@ public class PaymentTest {
         val actualValueOwner = paymentPage.getValueOwner();
         paymentPage.getNotificationOk();
 
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         //Проверка удаляет ли последнюю букву имени
         assertEquals("Innokentiy Kozelovski", actualValueOwner);
         assertEquals("APPROVED", paymentStatus);
@@ -454,10 +454,10 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getNotificationOk();
 
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertEquals("APPROVED", paymentStatus);
         assertEquals(transactionId, paymentID);
         assertNull(creditStatus);
@@ -467,15 +467,15 @@ public class PaymentTest {
     @Test
     public void shouldErrorApprovedCardLastMonth() {
         Configuration.holdBrowserOpen = true;
-        val cardInfo = new DataHelper().getVInvalidCardInfoLastMonth();
+        val cardInfo = new DataHelper().getInvalidCardInfoLastMonth();
         val paymentPage = new OrderPage().getPaymentPage();
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getWrongFormatYearField();
 
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertNull(transactionId);
         assertNull(paymentID);
         assertNull(creditStatus);
@@ -490,10 +490,10 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getNotificationOk();
 
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertEquals("APPROVED", paymentStatus);
         assertEquals(transactionId, paymentID);
         assertNull(creditStatus);
@@ -508,10 +508,10 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getWrongFormatYearField();
 
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertNull(transactionId);
         assertNull(paymentID);
         assertNull(creditStatus);
@@ -526,10 +526,10 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getWrongFormatYearField();
 
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertNull(transactionId);
         assertNull(paymentID);
         assertNull(creditStatus);
@@ -545,10 +545,10 @@ public class PaymentTest {
         paymentPage.getNotificationOk();
         // Получаем фактическое значение в поле Месяц
         val actualValueMonth = paymentPage.getValueMonth();
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         //Проверяем, что минус отсекся
         assertEquals("01", actualValueMonth);
         assertEquals("APPROVED", paymentStatus);
@@ -567,10 +567,10 @@ public class PaymentTest {
         // Получаем фактическое и ожидаемое значение поля Месяц
         val actualValueMonth = paymentPage.getValueMonth();
         val expectedValueMonth = cardInfo.getMonth().trim();
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         //Проверяем что пробел в начале отсекся
         assertEquals(expectedValueMonth, actualValueMonth);
         assertEquals("APPROVED", paymentStatus);
@@ -588,10 +588,10 @@ public class PaymentTest {
         paymentPage.getNotificationOk();
         // Получаем фактическое значение поля Месяц
         val actualValueMonth = paymentPage.getValueMonth();
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         //Проверяем что пробел в начале отсекся
         assertEquals("05", actualValueMonth);
         assertEquals("APPROVED", paymentStatus);
@@ -608,10 +608,10 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getErrorNotificationMonthRequired();
 
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertNull(transactionId);
         assertNull(paymentID);
         assertNull(creditStatus);
@@ -626,10 +626,10 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getErrorNotificationMonthRequired();
 
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertNull(transactionId);
         assertNull(paymentID);
         assertNull(creditStatus);
@@ -644,10 +644,10 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getWrongFormatYearField();
 
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertNull(transactionId);
         assertNull(paymentID);
         assertNull(creditStatus);
@@ -662,10 +662,10 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getWrongFormatYearField();
 
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertNull(transactionId);
         assertNull(paymentID);
         assertNull(creditStatus);
@@ -680,10 +680,10 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getWrongFormatYearField();
 
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertNull(transactionId);
         assertNull(paymentID);
         assertNull(creditStatus);
@@ -700,10 +700,10 @@ public class PaymentTest {
         // Получаем фактическое и ожидаемое значение поля Год
         val actualValueYear = paymentPage.getValueYear();
         val expectedValueYear = cardInfo.getYear().substring(1);
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertEquals(expectedValueYear, actualValueYear);
         assertEquals("APPROVED", paymentStatus);
         assertEquals(transactionId, paymentID);
@@ -719,10 +719,10 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getWrongFormatYearField();
 
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertNull(transactionId);
         assertNull(paymentID);
         assertNull(creditStatus);
@@ -736,10 +736,10 @@ public class PaymentTest {
         val paymentPage = new OrderPage().getPaymentPage();
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getNotificationOk();
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertEquals("APPROVED", paymentStatus);
         assertEquals(transactionId, paymentID);
         assertNull(creditStatus);
@@ -753,10 +753,10 @@ public class PaymentTest {
         val paymentPage = new OrderPage().getPaymentPage();
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getNotificationOk();
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertEquals("APPROVED", paymentStatus);
         assertEquals(transactionId, paymentID);
         assertNull(creditStatus);
@@ -771,10 +771,10 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getErrorNotificationYearRequired();
 
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertNull(transactionId);
         assertNull(paymentID);
         assertNull(creditStatus);
@@ -789,10 +789,10 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getErrorNotificationYearRequired();
 
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertNull(transactionId);
         assertNull(paymentID);
         assertNull(creditStatus);
@@ -807,10 +807,10 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getErrorNotificationCVCRequired();
 
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertNull(transactionId);
         assertNull(paymentID);
         assertNull(creditStatus);
@@ -825,10 +825,10 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getErrorNotificationCVCRequired();
 
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertNull(transactionId);
         assertNull(paymentID);
         assertNull(creditStatus);
@@ -843,10 +843,10 @@ public class PaymentTest {
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getErrorNotificationCVCRequired();
 
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertNull(transactionId);
         assertNull(paymentID);
         assertNull(creditStatus);
@@ -863,10 +863,10 @@ public class PaymentTest {
         // Получаем фактическое и ожидаемое значение поля CVC
         val actualValueCVC = paymentPage.getValueCVC();
         val expectedValueCVC = paymentPage.removeLastChar(cardInfo.getCvc());
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val paymentID = new DBHelper().getPaymentId();
-        val creditStatus = new DBHelper().getCreditStatus();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val paymentID = DBHelper.getPaymentId();
+        val creditStatus = DBHelper.getCreditStatus();
         assertEquals(expectedValueCVC, actualValueCVC);
         assertEquals("APPROVED", paymentStatus);
         assertEquals(transactionId, paymentID);
@@ -880,10 +880,10 @@ public class PaymentTest {
         val paymentPage = new OrderPage().getPaymentPage();
         paymentPage.fillingOutTheForm(cardInfo);
         paymentPage.getNotificationError();
-        val paymentStatus = new DBHelper().getPaymentStatus();
-        val transactionId = new DBHelper().getTransactionId();
-        val creditStatus = new DBHelper().getCreditStatus();
-        val paymentID = new DBHelper().getPaymentId();
+        val paymentStatus = DBHelper.getPaymentStatus();
+        val transactionId = DBHelper.getTransactionId();
+        val creditStatus = DBHelper.getCreditStatus();
+        val paymentID = DBHelper.getPaymentId();
         assertEquals("DECLINED", paymentStatus);
         assertEquals(transactionId, paymentID);
         assertNull(creditStatus);
