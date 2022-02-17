@@ -27,7 +27,7 @@ Node.js
 Для запуска тестов необходимо:
 
 1.Запустить контейнеры командой 'docker-compose up -d'
-1.Запустить приложение командой 'java -jar ./artifacts/aqa-shop.jar'.
+1.Запустить приложение командой 'java -jar ./aqa-shop.jar'.
 1.Запустить автотесты командой './gradlew clean test'. 
 1.Для создания отчета Allure запустить команду './gradlew allureReport'.
 
