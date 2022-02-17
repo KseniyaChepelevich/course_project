@@ -470,7 +470,7 @@ public class PaymentTest {
         val cardInfo = new DataHelper().getInvalidCardInfoLastMonth();
         val paymentPage = new OrderPage().getPaymentPage();
         paymentPage.fillingOutTheForm(cardInfo);
-        paymentPage.getWrongFormatYearField();
+        paymentPage.getWrongFormatMonthField();
 
         val paymentStatus = DBHelper.getPaymentStatus();
         val transactionId = DBHelper.getTransactionId();
@@ -506,7 +506,7 @@ public class PaymentTest {
         val cardInfo = new DataHelper().getInvalidCardInfoNonExistentMonth();
         val paymentPage = new OrderPage().getPaymentPage();
         paymentPage.fillingOutTheForm(cardInfo);
-        paymentPage.getWrongFormatYearField();
+        paymentPage.getWrongFormatMonthField();
 
         val paymentStatus = DBHelper.getPaymentStatus();
         val transactionId = DBHelper.getTransactionId();
@@ -524,7 +524,7 @@ public class PaymentTest {
         val cardInfo = new DataHelper().getInvalidCardInfo00Month();
         val paymentPage = new OrderPage().getPaymentPage();
         paymentPage.fillingOutTheForm(cardInfo);
-        paymentPage.getWrongFormatYearField();
+        paymentPage.getWrongFormatMonthField();
 
         val paymentStatus = DBHelper.getPaymentStatus();
         val transactionId = DBHelper.getTransactionId();

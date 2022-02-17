@@ -67,35 +67,35 @@ public class PaymentPage {
     }
 
     public void getErrorNotificationMonthRequired() {
-        errorCardNumberFieldRequired.shouldBe(visible).shouldHave(text("Поле обязательно для заполнения"));
+        errorMonthFieldRequired.shouldBe(visible).shouldHave(text("Поле обязательно для заполнения"));
     }
 
     public void getErrorNotificationYearRequired() {
-        errorCardNumberFieldRequired.shouldBe(visible).shouldHave(text("Поле обязательно для заполнения"));
+        errorYearFieldRequired.shouldBe(visible).shouldHave(text("Поле обязательно для заполнения"));
     }
 
     public void getErrorNotificationOwnerRequired() {
-        errorCardNumberFieldRequired.shouldBe(visible).shouldHave(text("Поле обязательно для заполнения"));
+        errorOwnerFieldRequired.shouldBe(visible).shouldHave(text("Поле обязательно для заполнения"));
     }
 
     public void getErrorNotificationCVCRequired() {
-        errorCardNumberFieldRequired.shouldBe(visible).shouldHave(text("Поле обязательно для заполнения"));
+        errorCVCFieldRequired.shouldBe(visible).shouldHave(text("Поле обязательно для заполнения"));
     }
 
     public void getWrongFormatMonthField() {
-        errorCardNumberFieldRequired.shouldBe(visible).shouldHave(text("Неверно указан срок действия карты"));
+        wrongFormatMonthField.shouldBe(visible).shouldHave(text("Неверно указан срок действия карты"));
     }
 
     public void getWrongFormatYearField() {
-        errorCardNumberFieldRequired.shouldBe(visible).shouldHave(text("Неверно указан срок действия карты"));
+        wrongFormatYearField.shouldBe(visible).shouldHave(text("Неверно указан срок действия карты"));
     }
 
     public void getWrongFormatOwnerField() {
-        errorCardNumberFieldRequired.shouldBe(visible).shouldHave(text("Неверный формат заполнения"));
+        wrongFormatOwnerField.shouldBe(visible).shouldHave(text("Неверный формат заполнения"));
     }
 
     public void notGetErrorNotificationOwnerRequired() {
-        errorCardNumberFieldRequired.shouldBe(hidden);
+        errorOwnerFieldRequired.shouldBe(hidden);
     }
 
     public void notGetErrorNotificationCardNumberRequired() {
@@ -103,27 +103,27 @@ public class PaymentPage {
     }
 
     public void notGetErrorNotificationMonthRequired() {
-        errorCardNumberFieldRequired.shouldBe(hidden);
+        errorMonthFieldRequired.shouldBe(hidden);
     }
 
     public void notGetErrorNotificationYearRequired() {
-        errorCardNumberFieldRequired.shouldBe(hidden);
+        errorYearFieldRequired.shouldBe(hidden);
     }
 
     public void notGetErrorNotificationCVCRequired() {
-        errorCardNumberFieldRequired.shouldBe(hidden);
+        errorCVCFieldRequired.shouldBe(hidden);
     }
 
     public void notGetWrongFormatMonthField() {
-        errorCardNumberFieldRequired.shouldBe(hidden);
+        wrongFormatMonthField.shouldBe(hidden);
     }
 
     public void notGetWrongFormatYearField() {
-        errorCardNumberFieldRequired.shouldBe(hidden);
+        wrongFormatYearField.shouldBe(hidden);
     }
 
     public void notGetWrongFormatOwnerField() {
-        errorCardNumberFieldRequired.shouldBe(hidden);
+        wrongFormatOwnerField.shouldBe(hidden);
     }
 
     public String getValue(SelenideElement field) {
