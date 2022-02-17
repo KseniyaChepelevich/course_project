@@ -14,7 +14,7 @@ import java.util.Properties;
 @UtilityClass
 
 public class DBHelper {
-    //private DBHelper() {}
+    private DBHelper() {}
 
     private final QueryRunner runner = new QueryRunner();
     private Properties prop = prop();
