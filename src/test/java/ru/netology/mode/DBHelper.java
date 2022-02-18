@@ -15,10 +15,9 @@ import java.util.Properties;
 
 public class DBHelper {
 
-
-    private final QueryRunner runner = new QueryRunner();
-    private Properties prop = prop();
-    private final Connection conn = getConnect();
+    private static final QueryRunner runner = new QueryRunner();
+    private static Properties prop = prop();
+    private static final Connection conn = getConnect();
 
     public static Properties prop() {
         Properties properties = new Properties();
