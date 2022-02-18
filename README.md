@@ -15,12 +15,9 @@
 
 Для работы с проектом необходимо установить:
 
-IntelliJ IDEA Ultimate
-Docker Desktop
-Расширения для IntelliJ IDEA:
-Docker
-DataBaseTool and Sql
-Node.js
+IntelliJ IDEA Ultimate 
+Docker Desktop 
+
 
 ### Установка и запуск
 
