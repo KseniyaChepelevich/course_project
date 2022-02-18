@@ -27,9 +27,9 @@ Node.js
 Для запуска тестов необходимо:
 
 1.Запустить контейнеры командой 'docker-compose up -d'.  
-1. Создать соединение с базой данных Database/new/Data Sourse/MySQL. Создать соединение с  параметрами: Host - localhost, port - 3306. user - aqa, password - mypass, Database - aqa-shop.  
+1.Создать соединение с базой данных Database/new/Data Sourse/MySQL. Создать соединение с  параметрами: Host - localhost, port - 3306. user - aqa, password - mypass, Database - aqa-shop.  
 1.Запустить приложение командой 'java -jar ./aqa-shop.jar'.  
-1. Обновить базу данных Refresh (Ctrl + F5).   
+1.Обновить базу данных Refresh (Ctrl + F5).   
 1.Запустить автотесты командой './gradlew clean test'.   
 1.Для создания отчета Allure запустить команду './gradlew allureReport'.
 
