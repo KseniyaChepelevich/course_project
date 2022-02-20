@@ -6,32 +6,29 @@
 
 ## Начало работы
 
-1.Запустить Idea.
-1.В терминале Idea ввести команду "clone https://github.com/KseniyaChepelevich/course_project.git".
-1.Дождаться окончания закрузки и индексации файлов.
-1.Выполнить шаги описанные в разделе "Установка и запуск."
+  1. Запустить Idea.  
+  1. В терминале Idea ввести команду "clone https://github.com/KseniyaChepelevich/course_project.git".  
+  1. Дождаться окончания закрузки и индексации файлов.  
+  1. Выполнить шаги описанные в разделе "Установка и запуск."  
 
 ### Prerequisites
 
 Для работы с проектом необходимо установить:
 
-IntelliJ IDEA Ultimate
-Docker Desktop
-Расширения для IntelliJ IDEA:
-Docker
-DataBaseTool and Sql
-Node.js
+IntelliJ IDEA Ultimate 
+Docker Desktop 
+
 
 ### Установка и запуск
 
 Для запуска тестов необходимо:
 
-1.Запустить контейнеры командой 'docker-compose up -d'
-1. Создать соединение с базой данных Database/new/Data Sourse/MySQL. Создать соединение с  параметрами: Host - localhost, port - 3306. user - aqa, password - mypass, Database - aqa-shop.
-1.Запустить приложение командой 'java -jar ./aqa-shop.jar'.
-1. Обновить базу данных Refresh (Ctrl + F5). 
-1.Запустить автотесты командой './gradlew clean test'. 
-1.Для создания отчета Allure запустить команду './gradlew allureReport'.
+  1. Запустить контейнеры командой 'docker-compose up -d'.  
+  1. Создать соединение с базой данных Database/new/Data Sourse/MySQL. Создать соединение с  параметрами: Host - localhost, port - 3306. user - aqa, password - mypass, Database - aqa-shop.  
+  1. Запустить приложение командой 'java -jar ./aqa-shop.jar'.  
+  1. Обновить базу данных Refresh (Ctrl + F5).   
+  1. Запустить автотесты командой './gradlew clean test'.   
+  1. Для создания отчета Allure запустить команду './gradlew allureReport'.
 
 ## Лицензия
 
