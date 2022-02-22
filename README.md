@@ -31,7 +31,7 @@
 
 ## Лицензия
 
-ОС - Windows 10 Pro x64
-версия Java: 11.0.12
+* ОС - Windows 10 Pro x64
+* версия Java: 11.0.12
 
 ## [Документация к проекту](https://github.com/KseniyaChepelevich/course_project/tree/master/docs)
