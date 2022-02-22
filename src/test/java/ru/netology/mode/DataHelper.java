@@ -74,123 +74,123 @@ public class DataHelper {
         return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), generateOwner(), generateCVC());
     }
 
-    public CardInfo getValidCardInfoEmptyYear() {
+    public CardInfo getInfoEmptyYear() {
         return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), "", generateOwner(), generateCVC());
     }
 
-    public CardInfo getValidCardInfoEmptyMonth() {
+    public CardInfo getInfoEmptyMonth() {
         return new CardInfo(getValidCardNumber(), "", getValidDate().substring(3), generateOwner(), generateCVC());
     }
 
-    public CardInfo getValidCardInfoEmptyOwner() {
+    public CardInfo getInfoEmptyOwner() {
         return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), "", generateCVC());
     }
 
-    public CardInfo getValidCardInfoEmptyCVC() {
+    public CardInfo getInfoEmptyCVC() {
         return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), generateOwner(), "");
     }
 
-    public CardInfo getValidCardInfoWithNameWithoutSpace() {
+    public CardInfo getInfoWithNameWithoutSpace() {
         return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), generateOwnerNameWithoutSpace(), generateCVC());
     }
 
-    public CardInfo getValidCardInfoNameInLatinWithAHyphen() {
+    public CardInfo getInfoNameInLatinWithAHyphen() {
         return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), "Mihail Petrov-Vodkin", generateCVC());
     }
 
-    public CardInfo getValidCardInfoNameInLatinWithADot() {
+    public CardInfo getInfoNameInLatinWithADot() {
         return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(2), "M. Petrov-Vodkin", generateCVC());
     }
 
-    public CardInfo getValidCardInfoNameToUpperCase() {
+    public CardInfo getInfoNameToUpperCase() {
         return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(2), generateOwnerToUpperCase(), generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoNameToLowerCase() {
+    public CardInfo getInfoNameToLowerCase() {
         return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), generateOwnerToLowerCase(), generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoNameInCyrillic() {
+    public CardInfo getInfoNameInCyrillic() {
         return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), "Иванов Иван", generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoWithHieroglyphsName() {
+    public CardInfo getInfoHieroglyphsName() {
         return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), "小名小名", generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoWithNumbersName() {
+    public CardInfo getInfoNumbersName() {
         return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), "345126586", generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoWithNonNumericAndNonAlphabeticCharactersName() {
+    public CardInfo getInfoNonNumericNonAlphabeticName() {
         return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), "+*-=№?", generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoWithLatinNameWithASpaceAtTheBeginning() {
+    public CardInfo getInfoLatinNameBeginningSpace() {
         return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), " " + generateOwner(), generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoWithLatinThreeLetterName() {
+    public CardInfo getInfoWithLatin3LetterName() {
         return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), "Yan", generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoWithLatinTwoLetterName() {
+    public CardInfo getInfoWithLatin2LetterName() {
         return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), "In", generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoWithLatinFourLetterName() {
+    public CardInfo getInfoWithLatin4LetterName() {
         return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), "Yana", generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoWithLatin21LetterName() {
+    public CardInfo getInfoWithLatin21LetterName() {
         return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), "Innokentiy Kozlovskiy", generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoWithLatin22LetterName() {
+    public CardInfo getInfoWithLatin22LetterName() {
         return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), "Innokentiy Kozelovskiy", generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoWithLatin20LetterName() {
+    public CardInfo getInfoWithLatin20LetterName() {
         return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), "Innokentiy Kozlovski", generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoLastMonth() {
+    public CardInfo getInfoLastMonth() {
         return new CardInfo(getValidCardNumber(), generateDate(-1, "MM"), generateDate(-1, "yy"), generateOwner(), generateCVC());
     }
 
-    public CardInfo getValidCardInfoCurrentMonth() {
+    public CardInfo getInfoCurrentMonth() {
         return new CardInfo(getValidCardNumber(), generateDate(0, "MM"), generateDate(0, "yy"), generateOwner(), generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoNonExistentMonth() {
+    public CardInfo getInfoNonExistentMonth() {
         return new CardInfo(getValidCardNumber(), "22", generateDate(0, "yy"), generateOwner(), generateCVC());
     }
 
-    public CardInfo getInvalidCardInfo00Month() {
+    public CardInfo getInfo00Month() {
         return new CardInfo(getValidCardNumber(), "00", generateDate(0, "yy"), generateOwner(), generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoNegativeMeaningMonth() {
-        return new CardInfo(getValidCardNumber(), "-01", generateDate(0, "yy"), generateOwner(), generateCVC());
+    public CardInfo getInfoNegativeMeaningMonth() {
+        return new CardInfo(getValidCardNumber(), "-01", generateDate(12, "yy"), generateOwner(), generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoMonthWithASpaceAtTheBeginning() {
+    public CardInfo getInfoMonthBeginningSpace() {
         return new CardInfo(getValidCardNumber(), " " + getValidDate().substring(0, 2), getValidDate().substring(3), generateOwner(), generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoMonthWithASpaceInTheMiddle() {
-        return new CardInfo(getValidCardNumber(), "0 5", getValidDate().substring(3), generateOwner(), generateCVC());
+    public CardInfo getInfoMonthSpaceInTheMiddle() {
+        return new CardInfo(getValidCardNumber(), "0 5", generateDate(12, "yy"), generateOwner(), generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoMonthWithNonAlphabeticCharacters() {
+    public CardInfo getInfoMonthNonAlphabetic() {
         return new CardInfo(getValidCardNumber(), "*/", getValidDate().substring(3), generateOwner(), generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoMonthWithAlphabeticCharacters() {
+    public CardInfo getInfoMonthLetters() {
         return new CardInfo(getValidCardNumber(), "ab", getValidDate().substring(3), generateOwner(), generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoLastYear() {
+    public CardInfo getInfoLastYear() {
         return new CardInfo(getValidCardNumber(), generateDate(-12, "MM"), generateDate(-12, "yy"), generateOwner(), generateCVC());
     }
 
@@ -198,47 +198,47 @@ public class DataHelper {
         return new CardInfo(getValidCardNumber(), generateDate(300, "MM"), generateDate(300, "yy"), generateOwner(), generateCVC());
     }
 
-    public CardInfo getInvalidCardInfo00Year() {
+    public CardInfo getInfo00Year() {
         return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), "00", generateOwner(), generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoNegativeNumberYear() {
+    public CardInfo getInfoNegativeNumberYear() {
         return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), "-" + getValidDate().substring(3), generateOwner(), generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoYearPlus6() {
+    public CardInfo getInfoYearPlus6() {
         return new CardInfo(getValidCardNumber(), generateDate(72, "MM"), generateDate(72, "yy"), generateOwner(), generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoYearPlus5() {
+    public CardInfo getInfoYearPlus5() {
         return new CardInfo(getValidCardNumber(), generateDate(60, "MM"), generateDate(60, "yy"), generateOwner(), generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoYearPlus4() {
+    public CardInfo getInfoYearPlus4() {
         return new CardInfo(getValidCardNumber(), generateDate(48, "MM"), generateDate(48, "yy"), generateOwner(), generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoYearWithNonAlphabeticCharacters() {
+    public CardInfo getInfoYearNonAlphabetic() {
         return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), "*/", generateOwner(), generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoYearWithAlphabeticCharacters() {
+    public CardInfo getInfoLettersYear() {
         return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), "ab", generateOwner(), generateCVC());
     }
 
-    public CardInfo getInvalidCardInfoCVCWithNonAlphabeticCharacters() {
+    public CardInfo getInfoCVCNonAlphabetic() {
         return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), generateOwner(), "*/=");
     }
 
-    public CardInfo getInvalidCardInfoCVCWithAlphabeticCharacters() {
+    public CardInfo getInfoWithLettersCVC() {
         return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), generateOwner(), "abc");
     }
 
-    public CardInfo getInvalidCardInfoCVCWith2Numbers() {
+    public CardInfo getInfoWith2NumbersCVC() {
         return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), generateOwner(), generateCVC2Numbers());
     }
 
-    public CardInfo getInvalidCardInfoCVCWith4Numbers() {
+    public CardInfo getInfoWith4NumbersCVC() {
         return new CardInfo(getValidCardNumber(), getValidDate().substring(0, 2), getValidDate().substring(3), generateOwner(), generateCVC4Numbers());
     }
 

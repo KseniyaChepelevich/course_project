@@ -20,13 +20,13 @@ public class PaymentPage {
     private SelenideElement buttonContinue = $x("//*[text()='Продолжить']");
     private SelenideElement notificationStatusOk = $x("//*[text()='Операция одобрена Банком.']");
     private SelenideElement errorCardNumberFieldRequired = $x("//*[text()='Номер карты']/following-sibling::*/input[@class='input__sub']");
-    private SelenideElement errorMonthFieldRequired = $x("//*[text()='Месяц']/following-sibling::*/input[@class='input__sub']");
-    private SelenideElement errorYearFieldRequired = $x("//*[text()='Год']/following-sibling::*/input[@class='input__sub']");
-    private SelenideElement errorOwnerFieldRequired = $x("//*[text()='Владелец']/following-sibling::*/input[@class='input__sub']");
-    private SelenideElement errorCVCFieldRequired = $x("//*[text()='CVC/CVV']/following-sibling::*/input[@class='input__sub']");
-    private SelenideElement wrongFormatMonthField = $x("//*[text()='Месяц']/following-sibling::*/input[@class='input__sub']");
-    private SelenideElement wrongFormatYearField = $x("//*[text()='Год']/following-sibling::*/input[@class='input__sub']");
-    private SelenideElement wrongFormatOwnerField = $x("//*[text()='Владелец']/following-sibling::*/input[@class='input__sub']");
+    private SelenideElement errorMonthFieldRequired = $x("//*[text()='Месяц']//following-sibling::span[@class='input__sub']");
+    private SelenideElement errorYearFieldRequired = $x("//*[text()='Год']//following-sibling::span[@class='input__sub']");
+    private SelenideElement errorOwnerFieldRequired = $x("//*[text()='Владелец']//following-sibling::span[@class='input__sub']");
+    private SelenideElement errorCVCFieldRequired = $x("//*[text()='CVC/CVV']//following-sibling::span[@class='input__sub']");
+    private SelenideElement wrongFormatMonthField = $x("//*[text()='Месяц']//following-sibling::span[@class='input__sub']");
+    private SelenideElement wrongFormatYearField = $x("//*[text()='Год']//following-sibling::span[@class='input__sub']");
+    private SelenideElement wrongFormatOwnerField = $x("//*[text()='Владелец']//following-sibling::span[@class='input__sub']");
     private SelenideElement notificationStatusError = $x("//*[text()='Ошибка! Банк отказал в проведении операции.']");
     private SelenideElement buttonSendARequest = $x("//*[text()='Отправляем запрос в Банк...']");
 
@@ -75,7 +75,7 @@ public class PaymentPage {
     }
 
     public void getErrorNotificationOwnerRequired() {
-        errorOwnerFieldRequired.shouldBe(visible).shouldHave(text("Поле обязательно для заполнения"));
+        errorOwnerFieldRequired.shouldBe(visible, Duration.ofSeconds(15)).shouldHave(text("Поле обязательно для заполнения"));
     }
 
     public void getErrorNotificationCVCRequired() {
@@ -88,6 +88,10 @@ public class PaymentPage {
 
     public void getWrongFormatYearField() {
         wrongFormatYearField.shouldBe(visible).shouldHave(text("Неверно указан срок действия карты"));
+    }
+
+    public void getWrongCardExpiredYearField() {
+        wrongFormatYearField.shouldBe(visible).shouldHave(text("Истёк срок действия карты"));
     }
 
     public void getWrongFormatOwnerField() {
