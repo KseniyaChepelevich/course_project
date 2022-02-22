@@ -15,8 +15,8 @@
 
 Для работы с проектом необходимо установить:
 
-IntelliJ IDEA Ultimate 
-Docker Desktop 
+* IntelliJ IDEA Ultimate 
+* Docker Desktop 
 
 
 ### Установка и запуск
