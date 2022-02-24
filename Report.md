@@ -12,7 +12,7 @@
 
 В процессе автоматизированного тестирования было протестировано 45 тест-кейсов.
 Из них 51.11% успешных и 48.89% неуспешных.
-[Ссылку на Allure Report прилагаю][http://localhost:63342/course_project/build/reports/allure-report/allureReport/index.html?_ijt=4oobb596qnab53t9a38v87jo9c&_ij_reload=RELOAD_ON_SAVE]
+[Ссылку на Allure Report прилагаю](http://localhost:63342/course_project/build/reports/allure-report/allureReport/index.html?_ijt=4oobb596qnab53t9a38v87jo9c&_ij_reload=RELOAD_ON_SAVE)
 
 Было найдено 22 дефекта. [Подробнее здесь][]
 
