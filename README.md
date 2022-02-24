@@ -15,8 +15,8 @@
 
 Для работы с проектом необходимо установить:
 
-IntelliJ IDEA Ultimate 
-Docker Desktop 
+* IntelliJ IDEA Ultimate 
+* Docker Desktop 
 
 
 ### Установка и запуск
@@ -25,13 +25,12 @@ Docker Desktop
 
   1. Запустить контейнеры командой 'docker-compose up -d'.
   1. Запустить приложение командой 'java -jar ./artifacts/aqa-shop.jar'.  
-  1. Создать соединение с базой данных Database/new/Data Sourse/MySQL. Создать соединение с  параметрами: Host - localhost, port - 3306. user - aqa, password - mypass, Database - aqa-shop.   
   1. Запустить автотесты командой './gradlew clean test'.   
   1. Для создания отчета Allure запустить команду './gradlew allureReport'.
 
 ## Лицензия
 
-ОС - Windows 10 Pro x64
-версия Java: 11.0.12
+* ОС - Windows 10 Pro x64
+* версия Java: 11.0.12
 
 ## [Документация к проекту](https://github.com/KseniyaChepelevich/course_project/tree/master/docs)
