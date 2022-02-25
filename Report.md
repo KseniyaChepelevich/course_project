@@ -7,7 +7,7 @@
 * **В процессе ручного тестирования** было протестировано 2 формы, форма "Купить" и "Купить в кредит" (91 тест-кейс).
   Из них 54.95% - успешных тестов и 45.05% неуспешных.
   Issue на неуспешные тест-кейсы [здесь](https://github.com/KseniyaChepelevich/course_project/issues)
-  Было найдено 41 дефектов. Из них:
+  Было найдено 41 дефект. Из них:
   Блокирующих - 5, в том числе 2 плавающих (проявляются только при ручном тестировании). Issue [здесь](https://github.com/KseniyaChepelevich/course_project/issues/30) и [здесь](https://github.com/KseniyaChepelevich/course_project/issues/15), и 2 бага банковского сервиса - принимает платеж заблокированной картой.([Купить](https://github.com/KseniyaChepelevich/course_project/issues/1), [Купить в кредит](https://github.com/KseniyaChepelevich/course_project/issues/17))
   Значительных - 12
   Незначительных - 24
