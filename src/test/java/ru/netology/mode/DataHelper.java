@@ -24,7 +24,7 @@ public class DataHelper {
     }
 
     public String getValidDate() {
-        int randomNumber = ThreadLocalRandom.current().nextInt(60);
+        int randomNumber = ThreadLocalRandom.current().nextInt(1,60);
         String date = generateDate(randomNumber, "MM.yy");
         return date;
     }
