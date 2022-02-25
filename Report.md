@@ -8,14 +8,14 @@
   Из них 54.95% - успешных тестов и 45.05% неуспешных.
   Issue на неуспешные тест-кейсы [здесь](https://github.com/KseniyaChepelevich/course_project/issues)
   Было найдено 41 дефектов. Из них:
-  Блокирующих - 5, в том числе 2 плавающих (проявляются только при ручном тестировании). Issue [здесь](https://github.com/KseniyaChepelevich/course_project/issues/30) и [здесь](https://github.com/KseniyaChepelevich/course_project/issues/15)
+  Блокирующих - 5, в том числе 2 плавающих (проявляются только при ручном тестировании). Issue [здесь](https://github.com/KseniyaChepelevich/course_project/issues/30) и [здесь](https://github.com/KseniyaChepelevich/course_project/issues/15), и 2 бага банковского сервиса - принимает платеж заблокированной картой.([Купить](https://github.com/KseniyaChepelevich/course_project/issues/1), [Купить в кредит](https://github.com/KseniyaChepelevich/course_project/issues/17))
   Значительных - 12
   Незначительных - 24
 
 * **В процессе автоматизированного тестирования** было протестировано 45 тест-кейсов на форме "Купить".
   Из них 57.77% успешных и 42.23% неуспешных.
   Было найдено 19 дефектов. Из них:
-  Блокирующих - 1
+  Блокирующих - 1 (баг банковского сервиса - принимает платеж заблокированной картой)
   Значительных - 6
   Незначительных - 12
 
