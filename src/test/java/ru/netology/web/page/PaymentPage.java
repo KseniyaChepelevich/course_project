@@ -38,7 +38,7 @@ public class PaymentPage {
 
 
     public void getNotificationOk() {
-        notificationStatusOk.shouldBe(visible, Duration.ofSeconds(360)).shouldHave(text("Операция одобрена Банком."));
+        notificationStatusOk.shouldBe(visible, Duration.ofSeconds(300)).shouldHave(text("Операция одобрена Банком."));
     }
 
     public void getButtonSendARequest() {
