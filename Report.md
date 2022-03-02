@@ -21,7 +21,13 @@
 
 Кроме того, найдено 2 плавающих дефекта: Issue [здесь](https://github.com/KseniyaChepelevich/course_project/issues/43) и [здесь](https://github.com/KseniyaChepelevich/course_project/issues/44)
 
-Allure Report прилагаю:
+**Allure Report прилагаю:**
+![Cource_project_Allure Report_1](https://user-images.githubusercontent.com/89973906/156306328-ebfe9713-8413-4bfe-b1cd-d8155e7b45ed.png)
+![Cource_project_Allure Report_2](https://user-images.githubusercontent.com/89973906/156306360-50ef46c3-0400-478b-b90a-cdf73bf223c3.png)
+![Cource_project_Allure Report_3](https://user-images.githubusercontent.com/89973906/156306382-56f76d91-0b04-4145-aa56-bc134a0223b7.png)
+
+
+
 
 
 
